@@ -128,19 +128,37 @@ def format_report_line(movie):
 # print(normalize_title(movies[2]["title"]))
 
 def titles_sorted_by_rating(movies):
-    ratings = {}
-    for movie in movies:
-        ratings[movie['title']] = movie['rating']
-    ratings = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
-    return list(ratings)
+    sorted_movies = sorted(movies, key=lambda movie: movie["rating"], reverse=True)
+    return [movie["title"] for movie in sorted_movies]
 
-def top_n_by_rating(movies):
-    ratings = {}
-    for movie in movies:
-        ratings[movie['title']] = movie['rating']
-    ratings = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
-    return list(ratings)[:3]
+def top_n_by_rating(movies, n=3):
+    sorted_movies = sorted(movies, key=lambda movie: movie["rating"], reverse=True)
+    return [(movie["title"], movie["rating"]) for movie in sorted_movies[:n]]
 
-# print(top_n_by_rating(movies))
+
+def count_by_genre(movies):
+    genre_counts = {}
+    for movie in movies:
+        for genre in movie["genres"]:
+            genre_counts[genre] = genre_counts.get(genre, 0) + 1
+    return genre_counts
+
+
+def actor_filmography(movies):
+    filmography = {}
+    for movie in movies:
+        for actor in movie["actors"]:
+            films = filmography.get(actor, [])
+            films.append(movie["title"])
+            filmography[actor] = films
+    return filmography
+
+
+
+avg = average_rating(movies)
+print ({movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg})
+
+# print(actor_filmography(movies))
+# print(count_by_genre(movies))
 
 
