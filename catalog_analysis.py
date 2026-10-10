@@ -161,4 +161,33 @@ print ({movie["title"]: movie["rating"] for movie in movies if movie["rating"] >
 # print(actor_filmography(movies))
 # print(count_by_genre(movies))
 
+def all_genres(movies):
+    genres = set()
+    for movie in movies:
+        genres.update(movie["genres"])
 
+    return genres
+
+def common_actors(movie1, movie2):
+    movie1_actors = set(actors for actors in movie1["actors"])
+    movie2_actors = set(actors for actors in movie2["actors"])
+    common_actors = movie1_actors&movie2_actors
+    return common_actors
+
+def genres_only_in_one(movies_a, movies_b):
+    genres_a = set()
+    genres_b = set()
+    for movie in movies_a:
+        genres_a.update(movie["genres"])
+    for movie in movies_b:
+        genres_b.update(movie["genres"])
+
+    only_in_movie_a_genres = genres_a - genres_b
+
+    return only_in_movie_a_genres
+
+# print(genres_only_in_one(movies[0:2], movies[5:6]))
+#
+# print(all_genres(movies))
+#
+# print(common_actors(movies[0], movies[3]))
