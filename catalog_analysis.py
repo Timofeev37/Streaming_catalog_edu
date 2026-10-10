@@ -103,7 +103,7 @@ def count_long_movies(movies, threshold=120):
             count += 1
     return count
 
-print(count_long_movies(movies))
+# print(count_long_movies(movies))
 
 
 def normalize_title(title):
@@ -155,8 +155,8 @@ def actor_filmography(movies):
 
 
 
-avg = average_rating(movies)
-print ({movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg})
+# avg = average_rating(movies)
+# print ({movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg})
 
 # print(actor_filmography(movies))
 # print(count_by_genre(movies))
@@ -191,3 +191,16 @@ def genres_only_in_one(movies_a, movies_b):
 # print(all_genres(movies))
 #
 # print(common_actors(movies[0], movies[3]))
+
+
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie["rating"] >= min_rating:
+            yield movie
+
+
+# for movie in iter_high_rated(movies):
+#     print(format_report_line(movie))
+
+# print(sum(movie["duration_min"] for movie in movies if movie["rating"] > 7))
+
