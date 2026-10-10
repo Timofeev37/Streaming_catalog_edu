@@ -48,11 +48,11 @@ def catalog_age_stats(movies, current_year=2026):
 
     return (current_year - year_max, current_year - year_min, years_avg)
 
-def duration(minutes):
+def duration_in_hours(minutes):
     hours = minutes // 60
-    minutes = minutes % 60
+    remainder = minutes % 60
 
-    return f'{hours:01}ч :{minutes:02}м'
+    return f'{hours}ч {remainder}м'
 
 def rating_tier(rating):
     if rating >= 9:
@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 # print(average_rating(movies))
 # print(catalog_age_stats(movies))
-# print(duration(movies[0]["duration_min"]))
+# print(duration_in_hours(movies[0]["duration_min"]))
 # print(rating_tier(6))
 # print(decade_label(2018))
 
@@ -105,3 +105,24 @@ def count_long_movies(movies, threshold=120):
 
 print(count_long_movies(movies))
 
+
+def normalize_title(title):
+    words = title.split()
+    capitalized_words = [word[0].upper() + word[1:] for word in words]
+    return " ".join(capitalized_words)
+
+
+def make_slug(title):
+    return title.lower().replace(" ", "-")
+
+
+def format_report_line(movie):
+    title = normalize_title(movie["title"])
+    genres = ", ".join(sorted(movie["genres"]))
+    length = duration_in_hours(movie["duration_min"])
+    return (
+        f'"{title}" ({movie["year"]}) — {movie["rating"]}/10, '
+        f'{length}, жанры: {genres}'
+    )
+
+# print(normalize_title(movies[2]["title"]))
