@@ -2,7 +2,8 @@ import math
 
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
-     "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
+     "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson",
+                                                    "O. Isaac"]},
     {"title": "Kitchen Stories", "year": 2019, "genres": {"comedy", "drama"},
      "rating": 7.1, "duration_min": 98, "actors": ["A. Novak", "M. Ferguson"]},
     {"title": "silent hours", "year": 2016, "genres": {"thriller", "drama"},
@@ -73,8 +74,6 @@ def decade_label(year):
             return "старые"
 
 
-if __name__ == "__main__":
-    main()
 
 # print(average_rating(movies))
 # print(catalog_age_stats(movies))
@@ -227,7 +226,9 @@ def build_report(movies):
     for genre in genres_top:
         print(f'    {genre[0]} - {genre[1]}')
     print('')
-    print(f'Все жанры каталога:', ", ".join(list(all_genres(movies))))
+    print('Все жанры каталога:', ", ".join(list(all_genres(movies))))
 
 
-# build_report(movies)
+if __name__ == "__main__":
+    main()
+    build_report(movies)
