@@ -1,6 +1,63 @@
+import math
+
+movies = [
+    {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
+     "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
+    {"title": "Kitchen Stories", "year": 2019, "genres": {"comedy", "drama"},
+     "rating": 7.1, "duration_min": 98, "actors": ["A. Novak", "M. Ferguson"]},
+    {"title": "silent hours", "year": 2016, "genres": {"thriller", "drama"},
+     "rating": 6.4, "duration_min": 112, "actors": ["J. Bloom", "K. Lee"]},
+    {"title": "Comet Racers", "year": 2023, "genres": {"sci-fi", "action"},
+     "rating": 5.9, "duration_min": 101, "actors": ["O. Isaac", "P. Diaz"]},
+    {"title": "The Last Bakery", "year": 2014, "genres": {"comedy"},
+     "rating": 7.8, "duration_min": 89, "actors": ["A. Novak", "T. Chalamet"]},
+    {"title": "midnight in oslo", "year": 2020, "genres": {"thriller", "mystery"},
+     "rating": 8.9, "duration_min": 124, "actors": ["K. Lee", "R. Ferguson"]},
+    {"title": "Garden of Static", "year": 2022, "genres": {"drama"},
+     "rating": 4.8, "duration_min": 137, "actors": ["P. Diaz", "J. Bloom"]},
+    {"title": "The Quiet Algorithm", "year": 2024, "genres": {"sci-fi", "drama"},
+     "rating": 9.2, "duration_min": 118, "actors": ["M. Ferguson", "O. Isaac"]},
+    {"title": "Two Left Shoes", "year": 2011, "genres": {"comedy"},
+     "rating": 6.0, "duration_min": 95, "actors": ["A. Novak", "K. Lee"]},
+    {"title": "Red Harbor", "year": 2018, "genres": {"action", "thriller"},
+     "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
+]
+
 def main():
     print("Hello from streaming-catalog-edu!")
 
 
+def average_rating(movies):
+    sum_rating = 0
+    for movie in movies:
+        sum_rating += movie["rating"]
+    average_rating = round(sum_rating / len(movies),1)
+    return average_rating
+
+def catalog_age_stats(movies, current_year=2026):
+    years_sum = 0
+    year_max = movies[0]["year"]
+    year_min = movies[0]["year"]
+    for movie in movies:
+        if movie["year"] <= year_min:
+            year_min = movie["year"]
+        elif movie["year"] >= year_max:
+            year_max = movie["year"]
+        years_sum += current_year - movie["year"]
+    years_avg = math.ceil(years_sum / len(movies))
+
+    return (current_year - year_max, current_year - year_min, years_avg)
+
+def duration(minutes):
+    hours = minutes // 60
+    minutes = minutes % 60
+
+    return f'{hours:01}ч :{minutes:02}м'
+
+
 if __name__ == "__main__":
     main()
+
+print(average_rating(movies))
+print(catalog_age_stats(movies))
+print(duration(movies[0]["duration_min"]))
