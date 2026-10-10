@@ -81,3 +81,27 @@ if __name__ == "__main__":
 # print(duration(movies[0]["duration_min"]))
 # print(rating_tier(6))
 # print(decade_label(2018))
+
+# for movie in movies:
+#     if "comedy" not in movie["genres"]:
+#         print(movie["title"])
+
+# i = 0
+# while i < len(movies):
+#     i += 1
+#     if movies[i]["rating"] > 9:
+#         print(movies[i]["title"])
+#         break
+#     if i == len(movies)-1:
+#         print("Шедевров не найдено")
+#         break
+
+def count_long_movies(movies, threshold=120):
+    count = 0
+    for movie in movies:
+        if movie["duration_min"] > threshold:
+            count += 1
+    return count
+
+print(count_long_movies(movies))
+
