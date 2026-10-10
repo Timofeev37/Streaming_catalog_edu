@@ -126,3 +126,21 @@ def format_report_line(movie):
     )
 
 # print(normalize_title(movies[2]["title"]))
+
+def titles_sorted_by_rating(movies):
+    ratings = {}
+    for movie in movies:
+        ratings[movie['title']] = movie['rating']
+    ratings = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
+    return list(ratings)
+
+def top_n_by_rating(movies):
+    ratings = {}
+    for movie in movies:
+        ratings[movie['title']] = movie['rating']
+    ratings = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
+    return list(ratings)[:3]
+
+# print(top_n_by_rating(movies))
+
+
